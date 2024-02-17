@@ -1,4 +1,8 @@
+// App.js
+import React from 'react';
 import './App.css';
+import StatBox from './components/statbox'; // Ensure this path matches your project structure
+import Tasks from './components/tasks'; // Ensure this path matches your project structure
 
 function App() {
   return (
