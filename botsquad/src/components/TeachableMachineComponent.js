@@ -80,7 +80,6 @@ const TeachableMachineComponent = () => {
     return (
         
             <div className="text-center">
-                <h1 className="text-xl font-semibold text-gray-800 mb-4">Teachable Machine Image Model</h1>
                 <div ref={webcamRef} id="webcam-container" className="inline-block"></div>
                 <div id="label-container" className="space-y-2 mt-4">
                     {lockStatus === 'UNLOCKED' && recognizedPerson ? (
@@ -91,7 +90,7 @@ const TeachableMachineComponent = () => {
                             <button 
                                 className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-300"
                                 
-                                onClick={sendText()}>
+                                onClick={()=>{}}>
                                 Notify Homeowner
                             </button>
                         </>
