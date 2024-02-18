@@ -5,6 +5,7 @@ import IconImage from './Icon.png'; // Assuming the icon image is in the root of
 import StatImage from './stat.png';
 import ClockImage from './clock.png';
 import PersonImage from './person.png';
+import TeachableMachineComponent  from './components/TeachableMachineComponent';
 
 function App() {
   return (
@@ -219,7 +220,9 @@ function App() {
               boxShadow: `0 0 0 1px #EBDFD7`,
               marginBottom: '15px',
               position: 'relative',
+
             }}>
+              <TeachableMachineComponent />
               {/* Content inside the new box can be added here */}
             </div>
           </div>
