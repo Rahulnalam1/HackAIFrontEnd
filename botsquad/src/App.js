@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import RahulImage from './rahul.png'; // Corrected the path to match the case sensitivity
 import IconImage from './Icon.png'; // Assuming the icon image is in the root of the project folder
@@ -8,8 +8,56 @@ import PersonImage from './person.png';
 import TeachableMachineComponent  from './components/TeachableMachineComponent';
 import AudioLinesImage from './audio-lines.png'; // Assuming the image is in the root of the project folder
 import UpImage from './up.png'; // Importing the up.png image
+import CheckImage from './check.png'; // Assuming the check icon is named check.png and located in the root of the project folder
+import MyChatbot from './components/chatbot'; // Adjust the import path as necessary
+import AudioVisualizer from './components/audiolevel';
 
 function App() {
+  const [weatherData, setWeatherData] = useState(null);
+  const [isChatbotVisible, setIsChatbotVisible] = useState(false);
+  const [isNewUserFormVisible, setIsNewUserFormVisible] = useState(false);
+
+  const toggleChatbot = () => {
+    console.log("Clicked", isChatbotVisible)
+    setIsChatbotVisible(!isChatbotVisible);
+    <MyChatbot isVisible={isChatbotVisible} />
+  };
+
+  const toggleNewUserForm = () => {
+    setIsNewUserFormVisible(!isNewUserFormVisible);
+  };
+
+  const handleNewUserSubmit = (event) => {
+    event.preventDefault(); // Prevent the form from causing a page reload
+    const formData = new FormData(event.target);
+    const newUser = {
+      name: formData.get('name'), // Assuming the input's name is 'name'
+      phone: formData.get('phone'), // Assuming the input's name is 'phone'
+    };
+    console.log(newUser); // Here you can handle the newUser object (e.g., state update, API call)
+
+    // Close the form after submit
+    setIsNewUserFormVisible(false);
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const url = 'https://api.weatherapi.com/v1/current.json?key=3df91e1aeedf44ff946115921241802&q=Columbus Ohio&aqi=no';
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setWeatherData(data); // Set the weather data in state
+      } catch (error) {
+        console.error('There was a problem with your fetch operation:', error);
+      }
+    };
+
+    fetchData();
+  }, []); // Empty dependency array means this effect runs once on mount
+
   return (
     <div className="App" style={{ position: 'relative' }}>
       <div className="flex">
@@ -17,9 +65,9 @@ function App() {
         <div className="bg-black w-64 h-screen flex flex-col items-start pt-6 pl-6 justify-between">
           <div>
             {/* Bot Squad title adjusted to align with the bottom axis of the Dashboard title */}
-            <h1 className="text-white text-2xl" style={{ position: 'absolute', top: '32px', left: '6px' }}>Bot Squad</h1>
+            <h1 className="text-white text-2xl" style={{ position: 'absolute', top: '32px', left: '6px'}}>notifi</h1>
             {/* Existing Add New User Button */}
-            <button style={{
+            <button onClick={toggleNewUserForm} style={{
               marginTop: '75px',
               width: '184px',
               height: '48px',
@@ -54,9 +102,37 @@ function App() {
                 Add New User
               </div>
             </button>
+            {isNewUserFormVisible && (
+              <form onSubmit={handleNewUserSubmit} style={{ marginTop: '20px' }}>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Name"
+                  style={{ display: 'block', marginBottom: '10px', width: '100%' }}
+                />
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder="Phone Number"
+                  style={{ display: 'block', marginBottom: '10px', width: '100%' }}
+                />
+                <button type="submit" style={{
+                  display: 'block',
+                  width: '100%',
+                  backgroundColor: '#E65F2B',
+                  color: 'white',
+                  padding: '10px',
+                  border: 'none',
+                  borderRadius: '5px',
+                  cursor: 'pointer',
+                }}>
+                  Submit
+                </button>
+              </form>
+            )}
           </div>
-          {/* New Circle Button at the bottom left with Icon */}
-          <button style={{
+         {/* New Circle Button at the bottom left with Icon */}
+         <button onClick={toggleChatbot} style={{
             marginBottom: '20px',
             width: '48px',
             height: '48px',
@@ -69,9 +145,9 @@ function App() {
             alignItems: 'center',
           }}>
             <img src={IconImage} alt="Icon" style={{
-              width: '24px', // Adjust size as needed
-              height: '24px', // Adjust size as needed
-            }}/>
+              width: '24px',
+              height: '24px',
+            }} />
           </button>
         </div>
         
@@ -259,9 +335,26 @@ function App() {
               boxShadow: `0 0 0 1px #EBDFD7`,
               marginBottom: '15px',
               position: 'relative',
+              display: 'flex', // Ensures that the child components can fill the space
             }}>
-              <TeachableMachineComponent />
+              
+              <div style={{ width: '100%', height: '100%' }}>
+                <TeachableMachineComponent />
+              </div>
               {/* Content inside the new box can be added here */}
+            </div>
+            {/* New smaller box below the large box */}
+            <div style={{
+              width: '872px', // Width as specified
+              height: '150px', // Height as specified
+              backgroundColor: 'rgba(255, 255, 255, 0.34)', // Matching the filling of the other boxes
+              borderRadius: '14px', // Matching the corner radius of the other boxes
+              boxShadow: `0 0 0 1px #EBDFD7`, // Matching the shadow of the other boxes
+              marginTop: '2px', // Space above this box, adjust as needed for your layout
+              position: 'relative', // Use relative for positioning within the layout
+            }}>
+              <AudioVisualizer />
+              {/* Content inside the new smaller box can be added here */}
             </div>
           </div>
           {/* Adjusted New Box with specified requirements */}
@@ -295,22 +388,233 @@ function App() {
               right: '20px', // Ensuring even spacing on both ends
               borderTop: '1px solid rgba(0, 0, 0, 0.08)', // Solid line with 8% opacity of black color
             }}></div>
-            {/* "All" text positioned above the line */}
+            {/* "All" text and circle positioned above the line */}
             <div style={{
               color: '#060606', // Font color
               fontSize: '14px', // Font size
               position: 'absolute',
-              top: '78px', // 7px above the line
-              left: '32px', // 7px to the right from the start of the line
+              top: '78px', // Positioned above the line
+              left: '32px', // Aligned with the start of the text above
+              display: 'flex', // Use flex to align text, circles, and additional texts horizontally
+              alignItems: 'center', // Center items vertically
             }}>
               All
+              {/* Circle next to "All" with no filling and number 10 inside */}
+              <div style={{
+                width: '20px', // Circle width
+                height: '20px', // Circle height
+                border: '2px solid #2B5CE6', // Circle border color
+                borderRadius: '50%', // Makes the div a circle
+                marginLeft: '5px', // Space between "All" text and the circle
+                display: 'flex', // Enables flexbox properties
+                justifyContent: 'center', // Centers content horizontally
+                alignItems: 'center', // Centers content vertically
+              }}>
+                <span style={{
+                  color: '#2B5CE6', // Font color for the number inside the circle
+                  fontSize: '11px', // Font size for the number
+                }}>
+                  10
+                </span>
+              </div>
+              {/* "Important" text to the right of the circle */}
+              <div style={{
+                marginLeft: '35px', // 35px to the right of the circle
+                color: '#060606', // Matching the font color of "All"
+                fontSize: '14px', // Matching the font size of "All"
+              }}>
+                Important
+              </div>
+              {/* "Notes" text and circle to the right of "Important" */}
+              <div style={{
+                marginLeft: '30px', // 30px to the right of "Important"
+                color: '#060606', // Matching the font color
+                fontSize: '14px', // Matching the font size
+                display: 'flex', // Use flex to align text and circle horizontally
+                alignItems: 'center', // Center items vertically
+              }}>
+                Notes
+                {/* Circle next to "Notes" */}
+                <div style={{
+                  width: '20px', // Circle width
+                  height: '20px', // Circle height
+                  border: '2px solid #2B5CE6', // Circle border color
+                  borderRadius: '50%', // Makes the div a circle
+                  marginLeft: '5px', // Space between "Notes" text and the circle
+                  display: 'flex', // Enables flexbox properties
+                  justifyContent: 'center', // Centers content horizontally
+                  alignItems: 'center', // Centers content vertically
+                }}>
+                  <span style={{
+                    color: '#2B5CE6', // Font color for the number inside the circle
+                    fontSize: '11px', // Font size for the number
+                  }}>
+                    05
+                  </span>
+                </div>
+              </div>
+              {/* "Links" text to the right of the "Notes" circle */}
+              <div style={{
+                marginLeft: '30px', // 30px to the right of the "Notes" circle
+                color: '#060606', // Matching the font color
+                fontSize: '14px', // Matching the font size
+                display: 'flex', // Use flex to align text and circle horizontally
+                alignItems: 'center', // Center items vertically
+              }}>
+                Links
+                {/* Circle next to "Links" */}
+                <div style={{
+                  width: '20px', // Circle width
+                  height: '20px', // Circle height
+                  border: '2px solid #2B5CE6', // Circle border color
+                  borderRadius: '50%', // Makes the div a circle
+                  marginLeft: '5px', // Space between "Links" text and the circle
+                  display: 'flex', // Enables flexbox properties
+                  justifyContent: 'center', // Centers content horizontally
+                  alignItems: 'center', // Centers content vertically
+                }}>
+                  <span style={{
+                    color: '#2B5CE6', // Font color for the number inside the circle
+                    fontSize: '11px', // Font size for the number
+                  }}>
+                    07
+                  </span>
+                </div>
+              </div>
             </div>
-            {/* Additional content inside the box can be added here */}
+            {/* Circle below the line, aligned with its left edge, with a check icon inside */}
+            <div style={{
+              width: '20px', // Circle width
+              height: '20px', // Circle height
+              borderRadius: '50%', // Makes the div a circle
+              backgroundColor: '#E65F2B', // Circle fill color
+              position: 'absolute',
+              top: '125px', // 20px beneath the horizontal line
+              left: '20px', // Aligned with the left edge of the line
+              display: 'flex', // Enables flexbox properties for centering the check icon
+              justifyContent: 'center', // Centers content horizontally
+              alignItems: 'center', // Centers content vertically
+            }}>
+              <img src={CheckImage} alt="Check" style={{
+                width: '12px', // Adjust the size of the check icon as needed
+                height: '12px', // Adjust the size of the check icon as needed
+              }}/>
+            </div>
+            {/* Second Circle with a 10px gap */}
+            <div style={{
+              width: '20px', // Circle width
+              height: '20px', // Circle height
+              borderRadius: '50%', // Makes the div a circle
+              backgroundColor: '#E65F2B', // Circle fill color
+              position: 'absolute',
+              top: '155px', // 30px beneath the first circle (20px height + 10px gap)
+              left: '20px', // Aligned with the left edge of the line
+              display: 'flex', // Enables flexbox properties for centering the check icon
+              justifyContent: 'center', // Centers content horizontally
+              alignItems: 'center', // Centers content vertically
+            }}>
+              <img src={CheckImage} alt="Check" style={{
+                width: '12px', // Adjust the size of the check icon as needed
+                height: '12px', // Adjust the size of the check icon as needed
+              }}/>
+            </div>
+            {/* Third Circle with a 10px gap */}
+            <div style={{
+              width: '20px', // Circle width
+              height: '20px', // Circle height
+              borderRadius: '50%', // Makes the div a circle
+              backgroundColor: '#E65F2B', // Circle fill color
+              position: 'absolute',
+              top: '185px', // 30px beneath the second circle (20px height + 10px gap)
+              left: '20px', // Aligned with the left edge of the line
+              display: 'flex', // Enables flexbox properties for centering the check icon
+              justifyContent: 'center', // Centers content horizontally
+              alignItems: 'center', // Centers content vertically
+            }}>
+              <img src={CheckImage} alt="Check" style={{
+                width: '12px', // Adjust the size of the check icon as needed
+                height: '12px', // Adjust the size of the check icon as needed
+              }}/>
+            </div>
+            {/* Filler text to the right of the orange circles */}
+            <div style={{
+              position: 'absolute',
+              top: '125px', // Aligned with the top of the first orange circle
+              left: '50px', // 15px to the right of the orange circle (20px width + 15px gap)
+              fontSize: '14px', // Font size set as requested
+            }}>
+              Filler text here here here here here.
+            </div>
+            <div style={{
+              position: 'absolute',
+              top: '155px', // Aligned with the top of the second orange circle
+              left: '50px', // 15px to the right of the orange circle (20px width + 15px gap)
+              fontSize: '14px', // Font size set as requested
+            }}>
+              Filler text here here here here here.
+            </div>
+            <div style={{
+              position: 'absolute',
+              top: '185px', // Aligned with the top of the third orange circle
+              left: '50px', // 15px to the right of the orange circle (20px width + 15px gap)
+              fontSize: '14px', // Font size set as requested
+            }}>
+              Filler text here here here here here.
+            </div>
+            {/* Box to the right of the filler text with "Approved" text inside */}
+            <div style={{
+              position: 'absolute',
+              top: '125px', // Aligned with the top of the orange circle
+              left: '400px', // 20px to the right of the filler text
+              width: '69px', // Box width
+              height: '24px', // Box height
+              borderRadius: '20px', // Corner radius
+              backgroundColor: 'rgba(26, 147, 46, 0.18)', // Color #1A932E with 18% filling
+              display: 'flex', // Use flexbox for centering the text
+              justifyContent: 'center', // Center horizontally
+              alignItems: 'center', // Center vertically
+            }}>
+              <span style={{
+                fontSize: '11px', // Font size for "Approved"
+                color: '#1A932E', // Font color for "Approved"
+              }}>
+                Approved
+              </span>
+              
+            </div>
+          </div>
+          {/* Adjusted New Box with specified requirements */}
+          <div style={{
+            position: 'absolute',
+            right: '20px',
+            bottom: '27px',
+            width: '532px', // Width adjusted as specified
+            height: '150px', // Height specified as 150px
+            backgroundColor: 'rgba(255, 255, 255, 0.34)', // Matching the filling of the other boxes
+            borderRadius: '14px', // Matching the corner radius of the other boxes
+            boxShadow: `0 0 0 1px #EBDFD7`, // Matching the shadow of the other boxes
+            marginTop: '417px', // Maintaining consistent spacing with the layout
+          }}>
+            {/* Display weather data here */}
+            {weatherData ? (
+              <div style={{ padding: '10px' }}> {/* Added padding for content spacing */}
+                <p style={{ margin: 0, fontWeight: 'bold' }}>Weather in {weatherData.location.name}, {weatherData.location.region}</p>
+                <p style={{ margin: '5px 0' }}>Temperature: {weatherData.current.temp_c}°C</p>
+                <p style={{ margin: '5px 0' }}>Condition: {weatherData.current.condition.text}</p>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <img src={`https:${weatherData.current.condition.icon}`} alt="Weather Icon" style={{ width: '48px', height: '48px' }} />
+                </div>
+              </div>
+            ) : (
+              <p style={{ padding: '10px' }}>Loading weather data...</p>
+            )}
           </div>
         </div>
+        <MyChatbot isVisible={isChatbotVisible} />
       </div>
     </div>
   );
 }
 
 export default App;
+

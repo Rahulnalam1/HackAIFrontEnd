@@ -1,6 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
 import * as tmImage from '@teachablemachine/image';
 
+import lockedIcon from '../lock.png'; // Adjust the path as necessary
+import unlockedIcon from '../unlock.png'; // Adjust the path as necessary
+
+
+
 
     //const [text, setText] = useState('');
 
@@ -79,28 +84,31 @@ const TeachableMachineComponent = () => {
 
     return (
         
-            <div className="text-center">
-                <div ref={webcamRef} id="webcam-container" className="inline-block"></div>
-                <div id="label-container" className="space-y-2 mt-4">
-                    {lockStatus === 'UNLOCKED' && recognizedPerson ? (
-                        <>
-                            <div className="text-lg text-green-500 font-medium">
-                                {`UNLOCKED: Welcome, ${recognizedPerson}!`}
-                            </div>
-                            <button 
-                                className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-300"
-                                
-                                onClick={()=>{}}>
-                                Notify Homeowner
-                            </button>
-                        </>
-                    ) : (
-                        <div className="text-lg text-red-500">
-                            {lockStatus}
-                        </div>
-                    )}
-                </div>
-            </div>
+        <div className="flex items-center justify-center">
+  <div ref={webcamRef} id="webcam-container" className="mr-4"></div>
+
+  <div id="label-container" className="flex flex-col items-center space-y-2">
+    {lockStatus === 'UNLOCKED' && recognizedPerson ? (
+      <>
+        <img src={unlockedIcon} alt="Unlocked" className="w-8 h-8 text-green-500" />
+        <div className="text-lg font-medium">{`Welcome, ${recognizedPerson}!`}</div>
+        <button
+            className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-700 focus:ring-opacity-50 transition duration-300 ease-in-out transform hover:-translate-y-1"
+            onClick={()=>{}}>
+            Notify Homeowner
+        </button>
+
+      </>
+    ) : (
+      <>
+        <img src={lockedIcon} alt="Locked" className="w-8 h-8 text-red-500" />
+        <div className="text-lg">Face Not Recognized</div>
+      </>
+    )}
+  </div>
+</div>
+
+      
     
     );
 };
