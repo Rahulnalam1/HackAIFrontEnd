@@ -219,7 +219,7 @@ function App() {
                   fontWeight: 'bold', // Made the font thicker
                   position: 'absolute',
                   top: '105px', // Pushed down 15px more from the previous position
-                                   left: '10px',
+                  left: '10px',
                 }}>
                   453 Occurrences
                 </div>
@@ -276,7 +276,36 @@ function App() {
             boxShadow: `0 0 0 1px #EBDFD7`, // Matching the shadow
             marginBottom: '15px', // Specified gap
           }}>
-            {/* Content inside the new box can be added here */}
+            {/* Text "Before you come back" with adjusted position and font weight */}
+            <div style={{
+              color: '#060606', // Font color
+              fontSize: '20px', // Font size remains increased by 4
+              fontWeight: '500', // Made the content a little less bold
+              position: 'absolute',
+              top: '25px', // Pushed up a bit from the previous position
+              left: '20px', // Pushed to the right a bit as well
+            }}>
+              Before you come back
+            </div>
+            {/* Horizontal line 80px down from the "Before you come back" content, with 8% filling of #000000 */}
+            <div style={{
+              position: 'absolute',
+              top: '105px', // 80px down from the "Before you come back" content
+              left: '20px', // Aligned with the start of the text above
+              right: '20px', // Ensuring even spacing on both ends
+              borderTop: '1px solid rgba(0, 0, 0, 0.08)', // Solid line with 8% opacity of black color
+            }}></div>
+            {/* "All" text positioned above the line */}
+            <div style={{
+              color: '#060606', // Font color
+              fontSize: '14px', // Font size
+              position: 'absolute',
+              top: '78px', // 7px above the line
+              left: '32px', // 7px to the right from the start of the line
+            }}>
+              All
+            </div>
+            {/* Additional content inside the box can be added here */}
           </div>
         </div>
       </div>
@@ -285,4 +314,3 @@ function App() {
 }
 
 export default App;
-
