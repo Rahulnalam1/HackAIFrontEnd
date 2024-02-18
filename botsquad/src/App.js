@@ -1,10 +1,22 @@
 // App.js
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import RahulImage from './rahul.png'; // Corrected the path to match the case sensitivity
 import IconImage from './Icon.png'; // Assuming the icon image is in the root of the project folder
+import MyChatbot from './components/chatbot'; // Adjust the import path as necessary
 
 function App() {
+
+  // State to toggle chatbot visibility
+  const [isChatbotVisible, setIsChatbotVisible] = useState(false);
+
+  // Function to toggle chatbot visibilityß
+  const toggleChatbot = () => {
+    console.log("Clicked", isChatbotVisible)
+    setIsChatbotVisible(!isChatbotVisible);
+    <MyChatbot isVisible={isChatbotVisible} />
+  };
+
   return (
     <div className="App" style={{ position: 'relative' }}>
       <div className="flex">
@@ -50,7 +62,7 @@ function App() {
             </button>
           </div>
           {/* New Circle Button at the bottom left with Icon */}
-          <button style={{
+          <button onClick={toggleChatbot} style={{
             marginBottom: '20px',
             width: '48px',
             height: '48px',
@@ -63,12 +75,12 @@ function App() {
             alignItems: 'center',
           }}>
             <img src={IconImage} alt="Icon" style={{
-              width: '24px', // Adjust size as needed
-              height: '24px', // Adjust size as needed
-            }}/>
+              width: '24px',
+              height: '24px',
+            }} />
           </button>
         </div>
-        
+
         {/* Horizontal Line */}
         <div style={{
           position: 'absolute',
@@ -103,7 +115,7 @@ function App() {
             borderRadius: '55px',
             border: '1px solid #ccc',
             paddingLeft: '15px',
-          }} placeholder="Search..."/>
+          }} placeholder="Search..." />
           {/* New Button with Rahul.png as a circle */}
           <button style={{
             position: 'absolute',
@@ -126,7 +138,7 @@ function App() {
               marginRight: '1px',
               objectFit: 'cover',
               borderRadius: '50%',
-            }}/>
+            }} />
             <div style={{
               marginLeft: '10px',
               position: 'relative',
@@ -157,26 +169,27 @@ function App() {
           </div>
           {/* Overview Boxes Section */}
           <div style={{
-  position: 'absolute',
-  left: '266px',
-  top: '165px', // Moved up by 5px from '175px'
-  display: 'flex',
-  flexWrap: 'wrap', // Added to handle overflow by wrapping boxes to the next line if needed
-  justifyContent: 'flex-start', // Changed from 'space-between' to 'flex-start'
-  width: 'calc(100% - 266px)', // Adjusted to match the left offset
-}}>
-  {Array.from({ length: 4 }).map((_, index) => (
-    <div key={index} style={{
-      width: '341px', // You can adjust this width as needed
-      height: '215px',
-      backgroundColor: 'rgba(255, 255, 255, 0.34)',
-      borderRadius: '14px',
-      boxShadow: `0 0 0 1px #EBDFD7`,
-      marginRight: '20px', // Consistent spacing for all boxes
-      marginBottom: '20px', // Added to handle vertical spacing when boxes wrap to the next line
-    }} />
-  ))}
-</div>
+            position: 'absolute',
+            left: '266px',
+            top: '165px', // Moved up by 5px from '175px'
+            display: 'flex',
+            flexWrap: 'wrap', // Added to handle overflow by wrapping boxes to the next line if needed
+            justifyContent: 'flex-start', // Changed from 'space-between' to 'flex-start'
+            width: 'calc(100% - 266px)', // Adjusted to match the left offset
+          }}>
+            {Array.from({ length: 4 }).map((_, index) => (
+              <div key={index} style={{
+                width: '341px', // You can adjust this width as needed
+                height: '215px',
+                backgroundColor: 'rgba(255, 255, 255, 0.34)',
+                borderRadius: '14px',
+                boxShadow: `0 0 0 1px #EBDFD7`,
+                marginRight: '20px', // Consistent spacing for all boxes
+                marginBottom: '20px', // Added to handle vertical spacing when boxes wrap to the next line
+              }} />
+            ))}
+            <MyChatbot isVisible={isChatbotVisible} />
+          </div>
         </div>
       </div>
     </div>
