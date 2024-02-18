@@ -1,4 +1,5 @@
 import './App.css';
+import RahulImage from './rahul.png'; // Corrected the path to match the case sensitivity
 
 function App() {
   return (
@@ -70,31 +71,54 @@ function App() {
           {/* Search Box */}
           <input style={{
             position: 'absolute',
-            right: '230px', // Moved to the right by an additional 15px
+            right: '230px',
             top: '20px',
-            width: 'calc(100% - 296px)', // Adjusts width dynamically based on the viewport width
-            maxWidth: '394px', // Ensures the search box does not exceed its intended maximum width
+            width: 'calc(100% - 296px)',
+            maxWidth: '394px',
             height: '48px',
             borderRadius: '55px',
             border: '1px solid #ccc',
             paddingLeft: '15px',
           }} placeholder="Search..."/>
-          {/* New Button */}
+          {/* New Button with Rahul.png as a circle */}
           <button style={{
             position: 'absolute',
-            right: '20px', // Aligns with the right side of the container
+            right: '20px',
             top: '20px',
             width: '195px',
             height: '48px',
             borderRadius: '24px',
-            backgroundColor: 'white', // Background color set to white
+            backgroundColor: 'white',
             border: 'none',
             cursor: 'pointer',
             display: 'flex',
-            justifyContent: 'center',
+            justifyContent: 'flex-start',
             alignItems: 'center',
+            paddingLeft: '10px',
           }}>
-            {/* Text removed */}
+            <img src={RahulImage} alt="Rahul" style={{
+              width: '38px',
+              height: '38px',
+              marginRight: '1px',
+              objectFit: 'cover',
+              borderRadius: '50%',
+            }}/>
+            <div style={{
+              marginLeft: '10px',
+              position: 'relative',
+              top: '1px',
+            }}>
+              <div style={{ fontSize: '14px' }}>
+                Rahul Nalam
+              </div>
+              <div style={{
+                color: '#292D32',
+                fontSize: '12px',
+                marginLeft: '-10px'
+              }}>
+                Homeowner
+              </div>
+            </div>
           </button>
           {/* Placeholder for future content */}
         </div>
