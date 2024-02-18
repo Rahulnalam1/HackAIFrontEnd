@@ -1,4 +1,3 @@
-
 .App {
   text-align: center;
 }
@@ -29,12 +28,25 @@
   color: #61dafb;
 }
 
+.chat-container .message-outgoing {
+  background-color: #f4e8c1;
+  /* Light beige color for outgoing messages */
+  color: #333 !important;
+  /* Dark text color for better readability */
+}
+
+.chat-container .message-incoming {
+  background-color: #f9d5a7;
+  /* Light orange color for incoming messages */
+  color: #333 !important;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
-

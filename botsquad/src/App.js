@@ -9,6 +9,7 @@ function App() {
 
   // State to toggle chatbot visibility
   const [isChatbotVisible, setIsChatbotVisible] = useState(false);
+  const [isNewUserFormVisible, setIsNewUserFormVisible] = useState(false);
 
   // Function to toggle chatbot visibilityß
   const toggleChatbot = () => {
@@ -16,6 +17,24 @@ function App() {
     setIsChatbotVisible(!isChatbotVisible);
     <MyChatbot isVisible={isChatbotVisible} />
   };
+
+  const toggleNewUserForm = () => {
+    setIsNewUserFormVisible(!isNewUserFormVisible);
+  };
+
+  const handleNewUserSubmit = (event) => {
+    event.preventDefault(); // Prevent the form from causing a page reload
+    const formData = new FormData(event.target);
+    const newUser = {
+      name: formData.get('name'), // Assuming the input's name is 'name'
+      phone: formData.get('phone'), // Assuming the input's name is 'phone'
+    };
+    console.log(newUser); // Here you can handle the newUser object (e.g., state update, API call)
+
+    // Close the form after submit
+    setIsNewUserFormVisible(false);
+  };
+
 
   return (
     <div className="App" style={{ position: 'relative' }}>
@@ -25,7 +44,7 @@ function App() {
           <div>
             <h1 className="text-white text-2xl mb-5">Bot Squad</h1>
             {/* Existing Add New User Button */}
-            <button style={{
+            <button onClick={toggleNewUserForm} style={{
               marginTop: '75px',
               width: '184px',
               height: '48px',
@@ -60,6 +79,34 @@ function App() {
                 Add New User
               </div>
             </button>
+            {isNewUserFormVisible && (
+              <form onSubmit={handleNewUserSubmit} style={{ marginTop: '20px' }}>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Name"
+                  style={{ display: 'block', marginBottom: '10px', width: '100%' }}
+                />
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder="Phone Number"
+                  style={{ display: 'block', marginBottom: '10px', width: '100%' }}
+                />
+                <button type="submit" style={{
+                  display: 'block',
+                  width: '100%',
+                  backgroundColor: '#E65F2B',
+                  color: 'white',
+                  padding: '10px',
+                  border: 'none',
+                  borderRadius: '5px',
+                  cursor: 'pointer',
+                }}>
+                  Submit
+                </button>
+              </form>
+            )}
           </div>
           {/* New Circle Button at the bottom left with Icon */}
           <button onClick={toggleChatbot} style={{

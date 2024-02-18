@@ -9,7 +9,7 @@ import {
   TypingIndicator,
 } from '@chatscope/chat-ui-kit-react';
 
-const API_KEY = "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"; // Replace with your actual API key
+const API_KEY = "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"; // Replace with your actual API key
 
 const MyChatbot = ({ isVisible }) => {
   const [messages, setMessages] = useState([
@@ -90,7 +90,7 @@ const MyChatbot = ({ isVisible }) => {
                 direction: message.direction === 'outgoing' ? 'outgoing' : 'incoming',
                 position: message.sender === "ChatGPT" ? 'single' : 'normal'
               }}
-                className="p-3 my-2 rounded-lg bg-blue-100 max-w-xs mx-3"
+                className={`p-3 my-2 rounded-lg max-w-xs mx-3 ${message.direction === 'outgoing' ? 'message-outgoing' : 'message-incoming'}`}
               />
             ))}
           </MessageList>
