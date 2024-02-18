@@ -1,6 +1,10 @@
+import React from 'react';
 import './App.css';
 import RahulImage from './rahul.png'; // Corrected the path to match the case sensitivity
 import IconImage from './Icon.png'; // Assuming the icon image is in the root of the project folder
+import StatImage from './stat.png';
+import ClockImage from './clock.png';
+import PersonImage from './person.png';
 
 function App() {
   return (
@@ -9,7 +13,8 @@ function App() {
         {/* Dashboard Sidebar */}
         <div className="bg-black w-64 h-screen flex flex-col items-start pt-6 pl-6 justify-between">
           <div>
-            <h1 className="text-white text-2xl mb-5">Bot Squad</h1>
+            {/* Bot Squad title adjusted to align with the bottom axis of the Dashboard title */}
+            <h1 className="text-white text-2xl" style={{ position: 'absolute', top: '32px', left: '6px' }}>Bot Squad</h1>
             {/* Existing Add New User Button */}
             <button style={{
               marginTop: '75px',
@@ -155,26 +160,83 @@ function App() {
           </div>
           {/* Overview Boxes Section */}
           <div style={{
-  position: 'absolute',
-  left: '266px',
-  top: '165px', // Moved up by 5px from '175px'
-  display: 'flex',
-  flexWrap: 'wrap', // Added to handle overflow by wrapping boxes to the next line if needed
-  justifyContent: 'flex-start', // Changed from 'space-between' to 'flex-start'
-  width: 'calc(100% - 266px)', // Adjusted to match the left offset
-}}>
-  {Array.from({ length: 4 }).map((_, index) => (
-    <div key={index} style={{
-      width: '341px', // You can adjust this width as needed
-      height: '215px',
-      backgroundColor: 'rgba(255, 255, 255, 0.34)',
-      borderRadius: '14px',
-      boxShadow: `0 0 0 1px #EBDFD7`,
-      marginRight: '20px', // Consistent spacing for all boxes
-      marginBottom: '20px', // Added to handle vertical spacing when boxes wrap to the next line
-    }} />
-  ))}
-</div>
+            position: 'absolute',
+            left: '266px',
+            top: '165px', // Moved up by 5px from '175px'
+            display: 'flex',
+            flexWrap: 'wrap', // Added to handle overflow by wrapping boxes to the next line if needed
+            justifyContent: 'flex-start', // Changed from 'space-between' to 'flex-start'
+            width: 'calc(100% - 266px)', // Adjusted to match the left offset
+          }}>
+            {Array.from({ length: 4 }).map((_, index) => (
+              <div key={index} style={{
+                width: '341px', // You can adjust this width as needed
+                height: '215px',
+                backgroundColor: 'rgba(255, 255, 255, 0.34)',
+                borderRadius: '14px',
+                boxShadow: `0 0 0 1px #EBDFD7`,
+                marginRight: '20px', // Consistent spacing for all boxes
+                marginBottom: '20px', // Added to handle vertical spacing when boxes wrap to the next line
+                position: 'relative', // Added to position the circle absolutely within the box
+              }}>
+                {/* Circle at the top left of each box with specific colors for each */}
+                <div style={{
+                  width: '46px',
+                  height: '46px',
+                  borderRadius: '50%',
+                  backgroundColor: index === 0 ? '#D398E7' : 
+                                   index === 1 ? '#E89271' : 
+                                   index === 2 ? '#70A1E5' : 
+                                   '#F0C274', // Last circle with #F0C274 color
+                  position: 'absolute',
+                  top: '10px',
+                  left: '10px',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                  {index === 0 && <img src={StatImage} alt="Stat" style={{ width: '24px', height: '24px' }}/>}
+                  {index === 2 && <img src={ClockImage} alt="Clock" style={{ width: '24px', height: '24px' }}/>}
+                  {index === 3 && <img src={PersonImage} alt="Person" style={{ width: '24px', height: '24px' }}/>}
+                </div>
+              </div>
+            ))}
+          </div>
+          <div style={{
+            position: 'absolute',
+            left: '266px',
+            top: '395px', // Adjusted for spacing
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'flex-start',
+            width: 'calc(100% - 266px)',
+          }}>
+            <div style={{
+              width: '872px', // Adjusted to span two boxes and half of the third
+              height: '400px', // Height increased by 30px
+              backgroundColor: 'rgba(255, 255, 255, 0.34)',
+              borderRadius: '14px',
+              boxShadow: `0 0 0 1px #EBDFD7`,
+              marginBottom: '15px',
+              position: 'relative',
+            }}>
+              {/* Content inside the new box can be added here */}
+            </div>
+          </div>
+          {/* Adjusted New Box with specified requirements */}
+          <div style={{
+            position: 'absolute',
+            left: '1158px', // Starts 20px after the big box
+            top: '395px', // Positioned at the same top as specified before
+            width: '532px', // Corrected width to ensure it aligns with the end of the fourth small box
+            height: '400px', // Specified height
+            backgroundColor: 'rgba(255, 255, 255, 0.34)', // Matching the beige color
+            borderRadius: '14px', // Matching the corner radius
+            boxShadow: `0 0 0 1px #EBDFD7`, // Matching the shadow
+            marginBottom: '15px', // Specified gap
+          }}>
+            {/* Content inside the new box can be added here */}
+          </div>
         </div>
       </div>
     </div>
