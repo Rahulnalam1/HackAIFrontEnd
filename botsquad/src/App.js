@@ -6,6 +6,8 @@ import StatImage from './stat.png';
 import ClockImage from './clock.png';
 import PersonImage from './person.png';
 import TeachableMachineComponent  from './components/TeachableMachineComponent';
+import AudioLinesImage from './audio-lines.png'; // Assuming the image is in the root of the project folder
+import UpImage from './up.png'; // Importing the up.png image
 
 function App() {
   return (
@@ -197,9 +199,104 @@ function App() {
                   alignItems: 'center',
                 }}>
                   {index === 0 && <img src={StatImage} alt="Stat" style={{ width: '24px', height: '24px' }}/>}
+                  {index === 1 && (
+                    <>
+                      <img src={AudioLinesImage} alt="Audio" style={{
+                        width: '24px', // Width set as requested
+                        height: '24px', // Height set as requested
+                        position: 'absolute',
+                        top: '11px', // Centering vertically within a 46px circle
+                        left: '11px', // Centering horizontally within a 46px circle
+                      }}/>
+                      {/* Added text "Audio Management" below the circle */}
+                      <div style={{
+                        color: '#797979', // Font color set as requested
+                        fontSize: '14px',
+                        position: 'absolute',
+                        top: '76px',
+                        left: '10px',
+                      }}>
+                        Audio Management
+                      </div>
+                      <div style={{
+                        color: '#797979',
+                        fontSize: '14px',
+                        position: 'absolute',
+                        top: '76px',
+                        left: '10px',
+                      }}>
+                        Total Occurrences
+                      </div>
+                      <div style={{
+                        color: '#060606', // Font color set as requested
+                        fontSize: '28px', // Font size set as requested
+                        fontWeight: 'bold', // Made the font thicker
+                        position: 'absolute',
+                        top: '105px', // Pushed down 15px more from the previous position
+                        left: '10px',
+                      }}>
+                        453 Occurrences
+                      </div>
+                      <img src={UpImage} alt="Up" style={{
+                        width: '17px', // Width set as requested
+                        height: '17px', // Height set as requested
+                        position: 'absolute',
+                        top: '175px', // Positioned 25px down from the "453" text
+                        left: '10px',
+                      }}/>
+                      <div style={{
+                        color: '#060606', // Font color set as requested
+                        fontSize: '10px', // Font size set as requested
+                        position: 'absolute',
+                        top: '175px', // Aligned with the image
+                        left: '32px', // Positioned right next to the image
+                      }}>
+                        12% increase from last month
+                      </div>
+                    </>
+                  )}
                   {index === 2 && <img src={ClockImage} alt="Clock" style={{ width: '24px', height: '24px' }}/>}
                   {index === 3 && <img src={PersonImage} alt="Person" style={{ width: '24px', height: '24px' }}/>}
                 </div>
+                {index === 0 && (
+                  <>
+                    <div style={{
+                      color: '#797979',
+                      fontSize: '14px',
+                      position: 'absolute',
+                      top: '76px',
+                      left: '10px',
+                    }}>
+                      Total Occurrences
+                    </div>
+                    <div style={{
+                      color: '#060606', // Font color set as requested
+                      fontSize: '28px', // Font size set as requested
+                      fontWeight: 'bold', // Made the font thicker
+                      position: 'absolute',
+                      top: '105px', // Pushed down 15px more from the previous position
+                      left: '10px',
+                    }}>
+                      453 Occurrences
+                    </div>
+                    <img src={UpImage} alt="Up" style={{
+                      width: '17px', // Width set as requested
+                      height: '17px', // Height set as requested
+                      position: 'absolute',
+                      top: '175px', // Positioned 25px down from the "453" text
+                      left: '10px',
+                    }}/>
+                    <div style={{
+                      color: '#060606', // Font color set as requested
+                      fontSize: '10px', // Font size set as requested
+                      position: 'absolute',
+                      top: '175px', // Aligned with the image
+                      left: '32px', // Positioned right next to the image
+                    }}>
+                      12% increase from last month
+                    </div>
+                  </>
+                )}
               </div>
             ))}
           </div>
@@ -220,7 +317,6 @@ function App() {
               boxShadow: `0 0 0 1px #EBDFD7`,
               marginBottom: '15px',
               position: 'relative',
-
             }}>
               <TeachableMachineComponent />
               {/* Content inside the new box can be added here */}
@@ -247,3 +343,4 @@ function App() {
 }
 
 export default App;
+
