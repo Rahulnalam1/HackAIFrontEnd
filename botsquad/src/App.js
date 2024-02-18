@@ -1,53 +1,21 @@
 // App.js
 import React from 'react';
 import './App.css';
-import StatBox from './components/statbox'; // Ensure this path matches your project structure
-import Tasks from './components/tasks'; // Ensure this path matches your project structure
+import StatBox from './components/statbox'; // Make sure this path matches your project structure
+import Tasks from './components/tasks'; // Make sure this path matches your project structure
+import Appearances from './components/appearances'; // Make sure this path matches your project structure
 
 function App() {
   return (
-    <div className="App" style={{ position: 'relative' }}>
+    <div className="App" style={{ position: 'relative', backgroundColor: '#EBDFD7' }}>
       <div className="flex">
         {/* Dashboard Sidebar */}
         <div className="bg-black w-64 h-screen flex flex-col items-start pt-6 pl-6">
           <h1 className="text-white text-2xl mb-5">Bot Squad</h1>
-          <button style={{
-            marginTop: '75px',
-            width: '184px',
-            height: '48px',
-            borderRadius: '24px',
-            backgroundColor: 'white',
-            border: 'none',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            paddingLeft: '5px',
-          }}>
-            <div style={{
-              width: '37px',
-              height: '37px',
-              borderRadius: '50%',
-              backgroundColor: '#E65F2B',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              color: 'white',
-              fontSize: '29px',
-              lineHeight: '35px',
-              textAlign: 'center',
-              position: 'relative',
-            }}>
-              +
-            </div>
-            <div style={{
-              marginLeft: '10px',
-              fontSize: '14px',
-            }}>
-              Add New User
-            </div>
-          </button>
+          {/* Sidebar Button */}
+          {/* ... */}
         </div>
-        
+
         {/* Horizontal Line */}
         <div style={{
           position: 'absolute',
@@ -59,7 +27,7 @@ function App() {
         }}></div>
 
         {/* Main Content Area */}
-        <div className="flex-grow" style={{ backgroundColor: '#EBDFD7', paddingLeft: '266px', paddingTop: '20px' }}>
+        <div className="flex-grow" style={{ paddingLeft: '266px', paddingTop: '20px' }}>
           {/* Dashboard Title */}
           <h1 style={{
             position: 'absolute',
@@ -71,36 +39,56 @@ function App() {
           }}>
             Dashboard
           </h1>
+
           {/* Search Box */}
           <input style={{
             position: 'absolute',
-            right: '230px', // Moved to the right by an additional 15px
+            right: '230px',
             top: '20px',
-            width: 'calc(100% - 296px)', // Adjusts width dynamically based on the viewport width
-            maxWidth: '394px', // Ensures the search box does not exceed its intended maximum width
+            width: 'calc(100% - 296px)',
+            maxWidth: '394px',
             height: '48px',
             borderRadius: '55px',
             border: '1px solid #ccc',
             paddingLeft: '15px',
-          }} placeholder="Search..."/>
+          }} placeholder="Search..." />
+
           {/* New Button */}
           <button style={{
             position: 'absolute',
-            right: '20px', // Aligns with the right side of the container
+            right: '20px',
             top: '20px',
             width: '195px',
             height: '48px',
             borderRadius: '24px',
-            backgroundColor: 'white', // Background color set to white
+            backgroundColor: 'white',
             border: 'none',
             cursor: 'pointer',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-            {/* Text removed */}
+            {/* Button Content */}
           </button>
-          {/* Placeholder for future content */}
+
+          {/* Stat Boxes */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            {/* StatBox Components */}
+            {/* ... */}
+          </div>
+
+          {/* Task and Appearances Components */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Tasks Component */}
+            <div className="col-span-1">
+              <Tasks />
+            </div>
+
+            {/* Appearances Component */}
+            <div className="col-span-1">
+              <Appearances />
+            </div>
+          </div>
         </div>
       </div>
     </div>
