@@ -1,47 +1,69 @@
 import './App.css';
 import RahulImage from './rahul.png'; // Corrected the path to match the case sensitivity
+import IconImage from './Icon.png'; // Assuming the icon image is in the root of the project folder
 
 function App() {
   return (
     <div className="App" style={{ position: 'relative' }}>
       <div className="flex">
         {/* Dashboard Sidebar */}
-        <div className="bg-black w-64 h-screen flex flex-col items-start pt-6 pl-6">
-          <h1 className="text-white text-2xl mb-5">Bot Squad</h1>
+        <div className="bg-black w-64 h-screen flex flex-col items-start pt-6 pl-6 justify-between">
+          <div>
+            <h1 className="text-white text-2xl mb-5">Bot Squad</h1>
+            {/* Existing Add New User Button */}
+            <button style={{
+              marginTop: '75px',
+              width: '184px',
+              height: '48px',
+              borderRadius: '24px',
+              backgroundColor: 'white',
+              border: 'none',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              paddingLeft: '5px',
+            }}>
+              <div style={{
+                width: '37px',
+                height: '37px',
+                borderRadius: '50%',
+                backgroundColor: '#E65F2B',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                color: 'white',
+                fontSize: '29px',
+                lineHeight: '35px',
+                textAlign: 'center',
+                position: 'relative',
+              }}>
+                +
+              </div>
+              <div style={{
+                marginLeft: '10px',
+                fontSize: '14px',
+              }}>
+                Add New User
+              </div>
+            </button>
+          </div>
+          {/* New Circle Button at the bottom left with Icon */}
           <button style={{
-            marginTop: '75px',
-            width: '184px',
+            marginBottom: '20px',
+            width: '48px',
             height: '48px',
-            borderRadius: '24px',
-            backgroundColor: 'white',
+            borderRadius: '50%',
+            backgroundColor: '#E65F2B',
             border: 'none',
             cursor: 'pointer',
             display: 'flex',
+            justifyContent: 'center',
             alignItems: 'center',
-            paddingLeft: '5px',
           }}>
-            <div style={{
-              width: '37px',
-              height: '37px',
-              borderRadius: '50%',
-              backgroundColor: '#E65F2B',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              color: 'white',
-              fontSize: '29px',
-              lineHeight: '35px',
-              textAlign: 'center',
-              position: 'relative',
-            }}>
-              +
-            </div>
-            <div style={{
-              marginLeft: '10px',
-              fontSize: '14px',
-            }}>
-              Add New User
-            </div>
+            <img src={IconImage} alt="Icon" style={{
+              width: '24px', // Adjust size as needed
+              height: '24px', // Adjust size as needed
+            }}/>
           </button>
         </div>
         
@@ -120,7 +142,39 @@ function App() {
               </div>
             </div>
           </button>
-          {/* Placeholder for future content */}
+          {/* Overview Text */}
+          <div style={{
+            position: 'absolute',
+            left: '266px',
+            top: '110px', // 95px (line's top) + 15px
+            fontSize: '25px',
+            fontWeight: '400',
+            color: '#000606',
+          }}>
+            Overview
+          </div>
+          {/* Overview Boxes Section */}
+          <div style={{
+  position: 'absolute',
+  left: '266px',
+  top: '165px', // Moved up by 5px from '175px'
+  display: 'flex',
+  flexWrap: 'wrap', // Added to handle overflow by wrapping boxes to the next line if needed
+  justifyContent: 'flex-start', // Changed from 'space-between' to 'flex-start'
+  width: 'calc(100% - 266px)', // Adjusted to match the left offset
+}}>
+  {Array.from({ length: 4 }).map((_, index) => (
+    <div key={index} style={{
+      width: '341px', // You can adjust this width as needed
+      height: '215px',
+      backgroundColor: 'rgba(255, 255, 255, 0.34)',
+      borderRadius: '14px',
+      boxShadow: `0 0 0 1px #EBDFD7`,
+      marginRight: '20px', // Consistent spacing for all boxes
+      marginBottom: '20px', // Added to handle vertical spacing when boxes wrap to the next line
+    }} />
+  ))}
+</div>
         </div>
       </div>
     </div>
