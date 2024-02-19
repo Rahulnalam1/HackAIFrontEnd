@@ -14,8 +14,8 @@ const TeachableMachineComponent = () => {
     const [recognizedPerson, setRecognizedPerson] = useState('');
     const [lastRecognizedPerson, setLastRecognizedPerson] = useState(''); // Track the last recognized person
     const webcamRef = useRef(null);
-    const modelURL = "https://teachablemachine.withgoogle.com/models/mOuUpj6nx/model.json";
-    const metadataURL = "https://teachablemachine.withgoogle.com/models/mOuUpj6nx/metadata.json";
+    const modelURL = "https://teachablemachine.withgoogle.com/models/pW4jiXCLE/model.json";
+    const metadataURL = "https://teachablemachine.withgoogle.com/models/pW4jiXCLE/metadata.json";
 
     // Function to send text message
     const sendText = (recipient ,person) => {
@@ -94,7 +94,7 @@ const TeachableMachineComponent = () => {
         <div className="text-lg font-medium">{`Welcome, ${recognizedPerson}!`}</div>
         <button
             className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-700 focus:ring-opacity-50 transition duration-300 ease-in-out transform hover:-translate-y-1"
-            onClick={()=>{}}>
+            onClick={sendText}>
             Notify Homeowner
         </button>
 
